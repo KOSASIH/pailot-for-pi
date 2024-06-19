@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pailot-for-pi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pailot-for-pi
+  template:
+    metadata:
+      labels:
+        app: pailot-for-pi
+    spec:
+      containers:
+      - name: auth-service
+        image: pailot-for-pi/auth-service:latest
+        ports:
+        - containerPort: 5000
+      - name: logistics-service
+        image: pailot-for-pi/logistics-service:latest
+        ports:
+        - containerPort: 5001
