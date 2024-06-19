@@ -1,0 +1,191 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.top__bar {
+	width: 100%;
+	display: flex;
+	flex: 0;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 17px 24px;
+	background-color: var(--light-purple);
+}
+
+.top__bar > div:first-child {
+	justify-self: flex-start;
+}
+.top__bar > span:nth-child(2) {
+	flex: 1;
+	text-align: center;
+}
+
+.body {
+	flex: 1;
+	padding: 1rem;
+	gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+}
+
+.description {
+	font-weight: lighter;
+	font-size: 16px;
+}
+
+.header {
+	width: 100%;
+	text-align: center;
+	color: var(--purple);
+	font-size: 14px;
+}
+
+.courier__details {
+	display: flex;
+	align-items: center;
+	font-size: 8px;
+	gap: 4px;
+}
+
+.courier__details > img {
+	width: 18px;
+}
+
+.courier__username {
+	display: flex;
+	font-size: 10px;
+}
+
+.new__user {
+	font-size: 8px;
+	color: var(--purple);
+	font-weight: 700;
+	background-color: rgba(229, 212, 255, 1);
+	border-radius: 4px;
+	padding: 2px 4px;
+}
+
+.courier__status__pending {
+	padding: 4px 8px;
+	background-color: var(--orange);
+	color: var(--black);
+	border-radius: 4px;
+}
+.courier__status__picked {
+	padding: 4px 8px;
+	background-color: var(--green);
+	color: var(--white);
+	border-radius: 4px;
+}
+
+.label {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+	color: var(--black);
+}
+
+label > p {
+	font-size: 12px;
+}
+
+.label > div {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.input__container {
+	display: flex;
+	align-items: center;
+	width: 70%;
+	height: 46px;
+	background-color: var(--light-purple-variant);
+	padding-inline: 11px;
+	gap: 11px;
+	flex: 1;
+	border-radius: 4px;
+	border-bottom: 1px solid var(--black);
+}
+
+.input__container input {
+	flex: 1;
+	border: none;
+	background-color: transparent;
+	font-size: 12px;
+}
+
+.input__container input:focus,
+.input__container input:active {
+	border: none;
+	outline: none;
+}
+
+.amount__container > span {
+	color: var(--red);
+	font-size: 8px;
+}
+
+.amount__container > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: rgba(66, 66, 66, 0.54);
+	padding: 7px;
+	border-radius: 4px;
+}
+
+.amount__container > div > p {
+	font-size: 12px;
+}
+
+.amount__container > div > .amount {
+	font-size: 14px;
+}
+
+.charges {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 2rem;
+}
+
+.fees {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.fees > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.total {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 82px;
+	border-block: 1px dashed rgba(66, 66, 66, 0.3);
+}
+
+.cta__container {
+	flex: 0;
+	margin-bottom: 24.5px;
+	padding-inline: 24px;
+}
+
+.cta {
+	width: 100%;
+	padding: 10px;
+	border-radius: 4px;
+	border: none;
+	background-color: var(--purple);
+	color: var(--light-purple);
+	font-weight: 500;
+}

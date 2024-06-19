@@ -9,7 +9,6 @@
 .profile {
 	display: flex;
 	align-items: center;
-	/* gap: 8px; */
 	width: 100%;
 	padding: 1rem;
 	background-color: var(--purple);
@@ -31,8 +30,32 @@
 	color: var(--white);
 }
 
+.carousel__container {
+	overflow: hidden;
+}
+
 .carousel {
+	position: relative;
+	width: 300vw;
 	display: flex;
+}
+
+.slide__one {
+	left: 0%;
+}
+.slide__two {
+	left: -100vw;
+	transition: all 250ms ease-in-out;
+}
+.slide__three {
+	left: -200vw;
+	transition: all 250ms ease-in-out;
+}
+
+.carousel > div {
+	width: 100vw;
+	display: flex;
+	justify-content: space-between;
 	background-color: #f0fbff;
 }
 
@@ -47,21 +70,21 @@
 
 .content h3 {
 	color: var(--purple);
-	font-size: 12px;
+	font-size: 0.9rem;
 	font-weight: 700;
 }
 
 .content p {
-	font-size: 10px;
+	font-size: 0.7rem;
 }
 
 .content p > span {
-	font-size: 10px;
+	font-size: 0.8rem;
 	color: var(--orange);
 }
 
 .content > span {
-	font-size: 8px;
+	font-size: 0.65rem;
 }
 
 .content .cta {
@@ -79,7 +102,6 @@
 }
 
 .navigate {
-	/* background-color: red; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -93,6 +115,7 @@
 	background-color: var(--black);
 	border-radius: 100%;
 	opacity: 0.3;
+	transition: all 250ms ease-in-out;
 }
 
 .navigate > .active__div {
@@ -101,6 +124,7 @@
 	background-color: var(--orange);
 	border-radius: 100%;
 	opacity: 1;
+	transition: all 250ms ease-in-out;
 }
 
 .delivery__and__courier {
@@ -110,6 +134,7 @@
 	flex-direction: column;
 	gap: 1rem;
 	flex: 1;
+	overflow: auto;
 }
 
 .modal__container {
@@ -119,8 +144,8 @@
 	gap: 0.5rem;
 }
 
-.modal__container > header {
-	font-size: 12px;
+.modal__container > h5 {
+	font-size: 0.9rem;
 }
 
 .modal {
@@ -145,14 +170,14 @@
 }
 
 .modal__content p {
-	font-size: 12px;
+	font-size: 0.8rem;
 	color: var(--black);
 	opacity: 0.75;
 }
 
 .modal__content > span {
 	color: var(--purple);
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: 700;
 }
 

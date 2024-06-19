@@ -31,6 +31,9 @@ body {
 	--light-purple: rgba(226, 232, 255, 1);
 	--light-purple-variant: rgba(231, 224, 236, 1);
 	--black: rgba(66, 66, 66, 1);
+	--grey: rgba(217, 217, 217, 1);
+	--red: rgba(255, 0, 0, 1);
+	--green: rgba(2, 205, 22, 1);
 }
 
 * {

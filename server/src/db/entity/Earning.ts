@@ -13,7 +13,7 @@ export class Earning {
 	@Column({ type: 'varchar', length: 255, name: 'payment_id', nullable: true })
 	paymentId: string;
 
-	@Column({ type: 'bigint' })
+	@Column({ type: 'float' })
 	amount: number;
 
 	@Column({

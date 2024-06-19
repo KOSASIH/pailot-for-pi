@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Styles from './Header.module.css';
+import { useNavigate } from 'react-router-dom';
+
+import styles from './Header.module.css';
 interface Props {
 	left_icon: string;
 	right_icon: string;
@@ -16,20 +17,32 @@ export const Header = ({
 	right_route_location,
 	title,
 }: Props) => {
+	const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    if (title === 'Settings') {
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user');
+      navigate('/welcome');
+    } else {
+      navigate(right_route_location);
+    }
+  }
 	return (
-		<div id={Styles.wrapper}>
+		<div id={styles.wrapper}>
 			<div>
-				<Link to={left_route_location}>
-					<div className={Styles.image_wrapper}>
-						<img src={left_icon} className={Styles.image_size} alt="left icon" />
-					</div>
-				</Link>
-				<span>{title}</span>
+				<div className={styles.image_wrapper} onClick={() => navigate(left_route_location)}>
+					<img src={left_icon} className={styles.image_size} alt="left icon" />
+				</div>
+				<span className={styles.title}>{title}</span>
 			</div>
 			<div>
-				<Link to={right_route_location}>
-					<img src={right_icon} alt="right icon" />
-				</Link>
+				<img
+					src={right_icon}
+					alt="right icon"
+					className={styles.right__icon}
+					onClick={handleNavigation}
+				/>
 			</div>
 		</div>
 	);

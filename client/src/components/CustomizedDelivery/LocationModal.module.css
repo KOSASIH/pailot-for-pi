@@ -30,7 +30,7 @@
 .description {
 	width: 90%;
 	font-weight: 300;
-	font-size: 12px;
+	font-size: 0.9rem;
 	color: var(--black);
 	text-align: center;
 }
@@ -39,12 +39,12 @@
 	width: 100%;
 	text-align: center;
 	color: var(--purple);
-	font-size: 14px;
+	font-size: 0.95rem;
 }
 
 .terms__and__conditions {
 	font-weight: 300;
-	font-size: 12px;
+	font-size: 0.9rem;
 
 	text-align: center;
 	color: var(--black);
@@ -52,7 +52,7 @@
 
 .terms__and__conditions span {
 	font-weight: 500;
-	font-size: 12px;
+	font-size: 0.9rem;
 	color: var(--purple);
 }
 

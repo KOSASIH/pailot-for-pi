@@ -1,0 +1,143 @@
+.container {
+	background-color: var(--white);
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	height: 100vh;
+	position: relative;
+}
+
+.top__bar {
+	background-color: var(--purple);
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	color: var(--white);
+}
+
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+	padding: 1rem;
+}
+
+.form > p {
+	font-size: 12px;
+	color: var(--purple);
+}
+
+.label {
+	width: 100%;
+	border: 1px solid rgba(66, 66, 66, 0.4);
+	padding: 0.5rem;
+	padding-inline: 1rem;
+	border-radius: 4px;
+	position: relative;
+}
+
+.label > p {
+	font-size: 10px;
+	color: rgba(66, 66, 66, 0.8);
+	position: absolute;
+	top: 0px;
+	left: 0.7rem;
+	transform: translateY(-50%);
+	background-color: var(--white);
+	padding-inline: 0.3rem;
+}
+
+.label > div {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	color: rgba(66, 66, 66, 0.6);
+}
+
+.mod {
+	width: 100%;
+	border: 1px solid rgba(66, 66, 66, 0.4);
+	padding: 0.5rem;
+	padding-inline: 1rem;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.mod > p {
+	font-size: 10px;
+	color: rgba(66, 66, 66, 0.8);
+	position: absolute;
+	top: 0px;
+	left: 0.7rem;
+	transform: translateY(-50%);
+	background-color: var(--white);
+	padding-inline: 0.3rem;
+}
+
+.mod > span {
+	font-size: 14px;
+	flex: 1;
+	opacity: 0.6;
+}
+
+.mod > .cancel__icon {
+	opacity: 0.5;
+}
+
+.select {
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	color: rgba(66, 66, 66, 0.6);
+}
+
+.select:active,
+.select:focus {
+	border: none;
+	outline: none;
+}
+
+.input {
+	flex: 1;
+	border: none;
+	outline: none;
+	background-color: transparent;
+}
+
+.input:active,
+.input:focus {
+	border: none;
+	outline: none;
+}
+
+.time__of__service {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	gap: 1rem;
+}
+
+.disabled__cta {
+	width: 100%;
+	padding: 0.5rem;
+	background-color: var(--grey);
+	border: none;
+	border-radius: 4px;
+	color: rgba(66, 66, 66, 0.8);
+}
+
+.cta {
+	width: 100%;
+	padding: 0.5rem;
+	background-color: var(--purple);
+	border: none;
+	border-radius: 4px;
+	color: var(--white);
+}

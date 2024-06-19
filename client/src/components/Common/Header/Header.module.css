@@ -1,12 +1,15 @@
 #wrapper {
 	display: flex;
-	color: #fff;
+	color: var(--white);
 	justify-content: space-between;
-	background: #30007e;
-	width: 100vw;
-	padding: 3% 6%;
+	background: var(--purple);
+	width: 100%;
+	/* height: 40px; */
+	padding: 1rem;
+	/* padding: 3% 6%; */
 	box-sizing: border-box;
-	position: fixed;
+	align-items: center;
+	/* position: fixed; */
 	z-index: 1;
 }
 #wrapper > div {
@@ -14,11 +17,26 @@
 	align-items: center;
 	gap: 10px;
 }
+
+#wrapper > div > div {
+	display: flex;
+	align-items: center;
+}
+
 .image_wrapper {
 	border-radius: 50%;
 }
+
+.title {
+	font-size: 14px;
+}
+
 .image_size {
-	width: 30px;
-	height: 30px;
+	width: 14px;
+	height: 13.61px;
 	border-radius: 50%;
+}
+
+.right__icon {
+	height: 15px;
 }

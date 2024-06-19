@@ -36,13 +36,11 @@ export interface CreateTransaction {
 	itemName: string;
 	itemDescription: string;
 	itemWeight: number;
-	itemWorth: number;
+	itemSize: number;
 	transactionAmount?: number;
 	deliveryStatus?: DeliveryStatus;
 	itemCategory: ItemCategory;
 	deliveryRange: DeliveryRange;
-	fromState: string;
-	toState: string | null;
 	estimatedDeliveryTime?: Date;
 }
 
@@ -57,11 +55,9 @@ export async function createTransactionEntry(
 			itemImage: '',
 			itemName: transactionData.itemName,
 			itemDescription: transactionData.itemDescription,
-			itemWeight: transactionData.itemWeight,
-			itemWorth: transactionData.itemWorth,
+			itemWeight: Number(transactionData.itemWeight),
+			itemSize: Number(transactionData.itemSize),
 			deliveryRange: transactionData.deliveryRange,
-			fromState: transactionData.fromState,
-			toState: transactionData?.toState || null,
 			itemCategory: transactionData.itemCategory,
 			estimatedDeliveryTime: transactionData.estimatedDeliveryTime || null,
 		};
@@ -114,12 +110,14 @@ export async function createTransactionEntry(
 
 		const transaction = TransactionRepository.create(transactionObject);
 		const createdTransaction = await TransactionRepository.save(transaction);
+		console.log(createdTransaction);
 
 		return {
 			type: Result.SUCCESS,
 			data: createdTransaction,
 		};
 	} catch (error) {
+		console.log(error);
 		return {
 			type: Result.ERROR,
 			message: `An error occurred while trying to create user transaction`,
@@ -331,6 +329,12 @@ export async function getAllPendingTransaction(): Promise<TransactionsResult> {
 		const pendingTransactions = await TransactionRepository.find({
 			where: { deliveryStatus: DeliveryStatus.PENDING, deletedDate: null },
 		});
+		// const pendingTransactions = await TransactionRepository.createQueryBuilder('transaction')
+		// 	.where('transaction.deliveryStatus = :deliveryStatus', {
+		// 		deliveryStatus: DeliveryStatus.PENDING,
+		// 	})
+		// 	.andWhere('transaction.deletedDate IS NULL')
+		// 	.getMany();
 		return {
 			type: Result.SUCCESS,
 			data: pendingTransactions,

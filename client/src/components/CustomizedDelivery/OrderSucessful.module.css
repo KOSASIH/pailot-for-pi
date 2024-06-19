@@ -1,0 +1,131 @@
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem 1rem;
+	gap: 2rem;
+	background-color: var(--white);
+}
+
+.header {
+	font-size: 14px;
+	color: var(--black);
+}
+
+.icon__container {
+	background-color: var(--green);
+	color: var(--white);
+	aspect-ratio: 1;
+	width: 100px;
+	border-radius: 100%;
+	display: grid;
+	place-content: center;
+	font-size: 2.5rem;
+	position: relative;
+	z-index: 10;
+}
+.icon__container::before {
+	content: '';
+	background-color: var(--green);
+	width: 100%;
+	border-radius: 100%;
+	height: 100%;
+	z-index: -1;
+	position: absolute;
+}
+
+.icon__container:after {
+	top: 2.5%;
+	left: 2.5%;
+	content: '';
+	background-color: var(--green);
+	width: 95%;
+	border-radius: 100%;
+	height: 95%;
+	z-index: -10;
+	position: absolute;
+	animation: pulse 1s 0.5s linear infinite;
+}
+
+@keyframes pulse {
+	from {
+		scale: 1;
+		opacity: 1;
+	}
+	to {
+		scale: 1.4;
+		opacity: 0;
+	}
+}
+
+.description {
+	font-size: 12px;
+	color: var(--black);
+	width: 65%;
+	text-align: center;
+}
+
+.courier__details {
+	display: flex;
+	align-items: center;
+	font-size: 0.75rem;
+	gap: 4px;
+}
+
+.courier__details > img {
+	width: 18px;
+}
+
+.courier__username {
+	display: flex;
+	font-size: 0.65rem;
+}
+
+.new__user {
+	font-size: 8px;
+	color: var(--purple);
+	font-weight: 700;
+	background-color: rgba(229, 212, 255, 1);
+	border-radius: 4px;
+	padding: 2px 4px;
+}
+
+.courier__status__pending {
+	padding: 4px 8px;
+	background-color: var(--orange);
+	color: var(--black);
+	border-radius: 4px;
+}
+
+.cta__container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+}
+
+.cta__top {
+	padding: 1rem;
+	background-color: var(--purple);
+	color: var(--white);
+	font-size: 0.75rem;
+	border: none;
+	border-radius: 4px;
+}
+.cta__mid {
+	padding: 1rem;
+	background-color: var(--light-purple);
+	color: var(--purple);
+	font-size: 0.75rem;
+	border: none;
+	border-radius: 4px;
+}
+.cta__bottom {
+	padding: 1rem;
+	background-color: transparent;
+	color: var(--black);
+	border: 1px solid var(--black);
+	font-size: 0.75rem;
+	border-radius: 4px;
+}

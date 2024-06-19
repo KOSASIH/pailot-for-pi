@@ -1,0 +1,137 @@
+.container {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	padding-right: 0.5rem;
+	border-radius: 4px;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.picked__container {
+	background-color: var(--light-purple);
+}
+
+.courier__photo__container {
+	display: grid;
+	place-content: center;
+	position: relative;
+}
+
+.courier__photo__container > img {
+	height: 24px;
+}
+
+.courier__photo__container > .online {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	height: 5px;
+	width: 5px;
+	border-radius: 100px;
+	background-color: rgba(2, 205, 22, 1);
+}
+.courier__photo__container > .offline {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	height: 5px;
+	width: 5px;
+	border-radius: 100px;
+	background-color: rgba(126, 125, 125, 1);
+}
+
+.content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.top__part {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.courier__details {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.username {
+	font-size: 12px;
+}
+
+.new__user {
+	font-size: 8px;
+	color: var(--purple);
+	font-weight: 700;
+	background-color: rgba(229, 212, 255, 1);
+	border-radius: 4px;
+	padding: 2.5px 5px;
+}
+
+.cta__container {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.pending__cta {
+	width: 54px;
+	font-size: 8px;
+	padding: 5px 10px;
+	background-color: var(--orange);
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	letter-spacing: 0.4375px;
+	font-weight: 700;
+}
+.picked__cta {
+	width: 54px;
+	font-size: 8px;
+	padding: 5px 10px;
+	background-color: rgba(2, 205, 22, 1);
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	letter-spacing: 0.4375px;
+	font-weight: 700;
+	color: var(--white);
+}
+.pick__cta {
+	width: 54px;
+	font-size: 8px;
+	padding: 5px 10px;
+	background-color: var(--purple);
+	color: var(--white);
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	letter-spacing: 0.4375px;
+	font-weight: 700;
+}
+
+.bottom__part {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	font-size: 8px;
+}
+
+.amount,
+.time,
+.vehicle {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.icon {
+	font-size: 12px;
+}

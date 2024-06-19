@@ -53,8 +53,8 @@ export class Transaction {
 	@Column({ type: 'float', name: 'item_weight' })
 	itemWeight: number;
 
-	@Column({ type: 'float', name: 'item_worth' })
-	itemWorth: number;
+	@Column({ type: 'float', name: 'item_size' })
+	itemSize: number;
 
 	@Column({
 		type: 'enum',
@@ -78,12 +78,6 @@ export class Transaction {
 		nullable: true,
 	})
 	deliveryRange: DeliveryRange;
-
-	@Column({ type: 'varchar', name: 'from_state' })
-	fromState: string;
-
-	@Column({ type: 'varchar', name: 'to_state', nullable: true })
-	toState: string;
 
 	@Column({ type: 'date', nullable: true, name: 'estimated_delivery_time' })
 	estimatedDeliveryTime: Date;

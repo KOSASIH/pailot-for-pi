@@ -1,7 +1,6 @@
 import styles from './DeliveryLocation.module.css';
-import React, { useState } from 'react';
-import { IoMdArrowRoundBack } from 'react-icons/io';
-import { IoMdArrowRoundForward } from 'react-icons/io';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io';
 // import { RiEBike2Line } from 'react-icons/ri';
 import { GiCancel } from 'react-icons/gi';
 import { MdOutlineClose } from 'react-icons/md';
@@ -9,20 +8,81 @@ import { BsCheckLg } from 'react-icons/bs';
 // import { TbSpeedboat } from 'react-icons/tb';
 // import { SlPlane } from 'react-icons/sl';
 import { motion } from 'framer-motion';
+import { debounce } from 'lodash';
 import { LocationModal } from './LocationModal';
 // import { useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deliveryDetailsActions, RootState } from '../../store/store';
+import { GET_USER_BY_USERNAME_URL } from '../../constants/url.constants';
+import { fetchWithCredentials } from '../../hooks/useApi';
+import { IUser } from '../../types/user';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
-	// eslint-disable-next-line no-unused-vars
-	setProgress: (value: number) => void;
+	setProgress: Dispatch<SetStateAction<number>>;
 }
 
 export const DeliveryLocation: React.FC<Props> = ({ setProgress }) => {
-	const [loadingState, setLoadingState] = useState<string>('error');
-	const [showModal, setShowModal] = useState<boolean>(false);
+	const deliveryType = useSelector((state: RootState) => state.deliveryType.deliveryType);
+	const deliveryDetails = useSelector((state: RootState) => state.deliveryDetails.deliveryDetails);
+  const { state } = useLocation();
+
+	const [loadingState, setLoadingState] = useState<'error' | 'loading' | 'success'>('error');
+	const [showModal, setShowModal] = useState<boolean>(state ? state.showModal : false);
+	const [pickupLocation, setPickupLocation] = useState<string>(deliveryDetails.pickupLocation);
+	const [dropLocation, setDropLocation] = useState<string>(deliveryDetails.dropLocation);
+	const [receiverUserName, setReceiverUserName] = useState<string>(
+		deliveryDetails.receiverDetails.username
+	);
+	const [receiverUser, setReceiverUser] = useState<IUser>(deliveryDetails.receiverDetails);
+	const dispatch = useDispatch();
 	const closeModal = () => {
 		setShowModal(false);
 	};
+	const deliveryDetailsSubmitHandler = () => {
+		dispatch(deliveryDetailsActions.setPickupLocation(pickupLocation));
+		dispatch(deliveryDetailsActions.setDropLocation(dropLocation));
+		dispatch(deliveryDetailsActions.setReceiverDetails(receiverUser));
+
+		closeModal();
+	};
+
+	// Store the debounced function across renders
+	const debouncedSearch = React.useRef(
+		debounce((criteria: string) => {
+      handleGetReceiverByUsername(criteria);
+		}, 500)
+    ).current;
+
+    // Cancel the debouncing function on unmount
+	React.useEffect(() => {
+    return () => {
+			debouncedSearch.cancel();
+		};
+	}, [debouncedSearch]);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setReceiverUserName(e.target.value);
+		debouncedSearch(e.target.value);
+	};
+
+	const handleGetReceiverByUsername = async (receiverUserName: string) => {
+    setLoadingState('loading');
+    try {
+      const user = await fetchWithCredentials(GET_USER_BY_USERNAME_URL(receiverUserName), {
+        method: 'GET',
+      });
+      if (user?.data?.data.username === receiverUserName) {
+        setReceiverUser(user.data.data);
+        setLoadingState('success');
+      } else {
+        setLoadingState('error');
+      }
+    } catch (error) {
+      setLoadingState('error');
+    }
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.top__bar}>
@@ -34,10 +94,11 @@ export const DeliveryLocation: React.FC<Props> = ({ setProgress }) => {
 						}}
 					/>
 				</div>
-				<span>Active Request</span>
+				<span>{deliveryType === 'active' ? 'Active Request' : 'Customized Delivery'}</span>
+
 				<IoMdArrowRoundForward
 					onClick={() => {
-						setProgress(5);
+						setShowModal(true);
 					}}
 				/>
 			</div>
@@ -58,14 +119,30 @@ export const DeliveryLocation: React.FC<Props> = ({ setProgress }) => {
 				<label htmlFor="Pickup Location" className={styles.label}>
 					<p>Pickup Location</p>
 					<div className={styles.input__container}>
-						<input type="text" name="Pickup Location" placeholder="Your Location" />
+						<input
+							type="text"
+							name="Pickup Location"
+							value={pickupLocation}
+							placeholder="Your Location"
+							onChange={(e) => {
+								setPickupLocation(e.target.value);
+							}}
+						/>
 					</div>
 					<span>Sender or Merchant Location</span>
 				</label>
 				<label htmlFor="Receiver Location" className={styles.label}>
 					<p>Drop Location</p>
 					<div className={styles.input__container}>
-						<input type="text" name="Receiver Location" placeholder="Receiver Location" />
+						<input
+							type="text"
+							name="Receiver Location"
+							placeholder="Receiver Location"
+							value={dropLocation}
+							onChange={(e) => {
+								setDropLocation(e.target.value);
+							}}
+						/>
 					</div>
 					<span>Person(s) to receive delivery</span>
 				</label>
@@ -80,11 +157,16 @@ export const DeliveryLocation: React.FC<Props> = ({ setProgress }) => {
 								type="text"
 								name="Receiver Pi Username"
 								placeholder="Receiver Pi Username"
-								onChange={() => {
-									setLoadingState('loading');
+								value={receiverUserName}
+								onChange={(e) => {
+									handleChange(e);
 								}}
 							/>
-							<GiCancel />
+							<GiCancel
+								onClick={() => {
+									setReceiverUserName('');
+								}}
+							/>
 						</div>
 						<div className={styles.loading__state__container}>
 							{loadingState === 'loading' && <div className={styles.loading__spinner}></div>}
@@ -106,15 +188,26 @@ export const DeliveryLocation: React.FC<Props> = ({ setProgress }) => {
 			>
 				<button
 					type="button"
-					className={styles.cta}
+					className={
+						!receiverUser.username || !pickupLocation || !dropLocation
+							? styles.cta__disabled
+							: styles.cta
+					}
 					onClick={() => {
 						setShowModal(true);
 					}}
+					disabled={!receiverUser.username || !pickupLocation || !dropLocation}
 				>
 					Next
 				</button>
 			</motion.div>
-			{showModal && <LocationModal setProgress={setProgress} closeModal={closeModal} />}
+			{showModal && (
+				<LocationModal
+					setProgress={setProgress}
+					closeModal={closeModal}
+					deliveryDetailsSubmitHandler={deliveryDetailsSubmitHandler}
+				/>
+			)}
 		</div>
 	);
 };

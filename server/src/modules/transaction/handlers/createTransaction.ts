@@ -4,6 +4,7 @@ import { createTransactionEntry } from '../services/transaction.services';
 
 export async function createTransaction(req: Request, res: Response) {
 	const transactionData = req.body;
+	console.log(req.file);
 	if (req.file) {
 		transactionData.itemImage = req.file.path;
 	}

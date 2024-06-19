@@ -11,6 +11,8 @@
 }
 
 .list__item {
+	cursor: pointer;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -33,6 +35,8 @@
 }
 
 .active__item {
+	cursor: pointer;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;

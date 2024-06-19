@@ -8,3 +8,8 @@ export { default as deliveryLady } from './deliveryLady.svg';
 export { default as deliveryMan } from './deliveryMan.svg';
 export { default as deliveryBikeMan } from './deliveryBikeMan.svg';
 export { default as pailotPurpleLogo } from './pailotPurpleLogo.svg';
+export { default as logo__noBg } from './logo__noBg.svg';
+export { default as summaryImage } from './summaryImage.svg';
+export { default as defaultUser } from './defaultUser.svg';
+export { default as defaultUser2 } from './defaultUser2.svg';
+export { default as chart } from './chart.svg';

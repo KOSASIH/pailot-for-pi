@@ -15,13 +15,11 @@ export interface ITransaction {
 	itemName: string;
 	itemDescription: string;
 	itemWeight: number;
-	itemWorth: number;
+	itemSize: number;
 	transactionAmount: number;
 	deliveryStatus: DeliveryStatus;
 	itemCategory: ItemCategory;
 	deliveryRange: DeliveryRange;
-	fromState: string;
-	toState: string | null;
 	estimatedDeliveryTime: Date | null;
 	pickupDate: Date | null;
 	deliveryDate: Date;
@@ -41,7 +39,7 @@ export interface CreateTransactionDTO {
 	itemName: string;
 	itemDescription: string;
 	itemWeight: number;
-	itemWorth: number;
+	itemSize: number;
 	transactionAmount?: number;
 	deliveryStatus: DeliveryStatus;
 	itemCategory: ItemCategory;
@@ -60,12 +58,10 @@ export interface UpdateTransaction {
 	itemName?: string;
 	itemDescription?: string;
 	itemWeight?: number;
-	itemWorth?: number;
+	itemSize?: number;
 	transactionAmount?: number;
 	itemCategory?: ItemCategory;
 	deliveryRange?: DeliveryRange;
-	fromState?: string;
-	toState?: string;
 	estimatedDeliveryTime?: Date;
 	pickupDate?: Date;
 	deliveryDate?: Date;

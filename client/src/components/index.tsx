@@ -18,7 +18,6 @@ export { SelectLanguage } from './WelcomeScreen/SelectLanguage';
 export { SettingsHome } from './Settings/SettingsHome';
 export { Wallet } from './Settings/Wallet';
 
-
 // Customize delivery
 export { DeliveryDetails } from './CustomizedDelivery/DeliveryDetails';
 export { DeliveryLocation } from './CustomizedDelivery/DeliveryLocation';
@@ -27,3 +26,4 @@ export { DeliverySummary } from './CustomizedDelivery/DeliverySummary';
 export { DeliveryWeightSize } from './CustomizedDelivery/DeliveryWeightSize';
 export { ModeOfDelivery } from './CustomizedDelivery/ModeOfDelivery';
 export { UploadDeliveryImage } from './CustomizedDelivery/UploadDeliveryImage';
+export { OrderSucessful } from './CustomizedDelivery/OrderSucessful';

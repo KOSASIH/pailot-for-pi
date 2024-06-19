@@ -1,0 +1,47 @@
+.container {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--light-purple);
+	z-index: 9999;
+}
+
+.logo__container {
+	border-radius: 100px;
+	position: relative;
+	isolation: isolate;
+	z-index: 10;
+}
+
+.logo__container:after {
+	content: '';
+	position: absolute;
+	border-radius: 100px;
+	height: 95%;
+	width: 95%;
+	top: 1.9%;
+	left: 2.5%;
+	z-index: -1;
+	background-color: var(--purple);
+	animation: pulse 2s linear infinite;
+}
+
+.logo {
+	border-radius: 100px;
+	width: 10rem;
+	aspect-ratio: 1;
+}
+
+@keyframes pulse {
+	0% {
+		scale: 1;
+		opacity: 1;
+	}
+	100% {
+		scale: 1.3;
+		opacity: 0;
+	}
+}

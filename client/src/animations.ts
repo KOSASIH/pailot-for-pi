@@ -22,7 +22,7 @@ export const scale = (delay: number, duration: number) => {
 export const fadeIn = {
 	opacity: [0, 0, 1, 1, 0],
 	transition: {
-		opacity: { duration: 9 },
+		opacity: { duration: 7 },
 	},
 };
 

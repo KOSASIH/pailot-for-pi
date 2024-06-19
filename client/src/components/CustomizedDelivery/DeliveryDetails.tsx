@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './DeliveryDetails.module.css';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 import { GiCancel } from 'react-icons/gi';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { motion } from 'framer-motion';
+import { useSelector, useDispatch } from 'react-redux';
+import { deliveryDetailsActions, RootState } from '../../store/store';
 
 interface Props {
-	// eslint-disable-next-line no-unused-vars
-	setProgress: (value: number) => void;
+	setProgress: Dispatch<SetStateAction<number>>;
 }
 
 export const DeliveryDetails: React.FC<Props> = ({ setProgress }) => {
+	const deliveryType = useSelector((state: RootState) => state.deliveryType.deliveryType);
+	const deliveryDetails = useSelector((state: RootState) => state.deliveryDetails.deliveryDetails);
+
+	const [productName, setProductName] = useState<string>(deliveryDetails.productName);
+	const [description, setDescription] = useState<string>(deliveryDetails.description);
+	const [category, setCategory] = useState<string>('');
+
+	const dispatch = useDispatch();
+
+	const deliveryDetailsSubmitHandler = () => {
+		dispatch(deliveryDetailsActions.setProductName(productName));
+		dispatch(deliveryDetailsActions.setDescription(description));
+		dispatch(deliveryDetailsActions.setCategory(category));
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.top__bar}>
@@ -19,14 +34,23 @@ export const DeliveryDetails: React.FC<Props> = ({ setProgress }) => {
 					<IoMdArrowRoundBack
 						className={styles.back}
 						onClick={() => {
-							setProgress(1);
+							if (deliveryType === 'active') {
+								setProgress(2);
+							} else {
+								setProgress(1);
+							}
 						}}
 					/>
 				</div>
-				<span>Active Request</span>
+				<span>{deliveryType === 'active' ? 'Active Request' : 'Customized Delivery'}</span>
 				<IoMdArrowRoundForward
 					onClick={() => {
-						setProgress(3);
+						if (deliveryType === 'active') {
+							setProgress(4);
+						} else {
+							setProgress(3);
+						}
+						deliveryDetailsSubmitHandler();
 					}}
 				/>
 			</div>
@@ -56,7 +80,14 @@ export const DeliveryDetails: React.FC<Props> = ({ setProgress }) => {
 							}}
 							className={styles.input__container}
 						>
-							<input type="text" name="Product Name" placeholder="Example: Tesla Model Pi 3" />
+							<input
+								type="text"
+								name="Product Name"
+								placeholder="Example: Tesla Model Pi 3"
+								onChange={(e) => {
+									setProductName(e.target.value);
+								}}
+							/>
 							<GiCancel />
 						</motion.div>
 						<AiOutlineEdit />
@@ -80,6 +111,9 @@ export const DeliveryDetails: React.FC<Props> = ({ setProgress }) => {
 							// cols={30}
 							rows={10}
 							placeholder="Example: Samsung Ultra 23 Gold"
+							onChange={(e) => {
+								setDescription(e.target.value);
+							}}
 						/>
 						<AiOutlineEdit />
 					</div>
@@ -98,9 +132,20 @@ export const DeliveryDetails: React.FC<Props> = ({ setProgress }) => {
 								type: 'tween',
 							}}
 							name="Category"
+							value={category}
 							className={styles.select}
+							onChange={(e) => setCategory(e.target.value)}
 						>
-							<option value={0}>Phones and Computers</option>
+              <option value="">--Select category--</option>
+							<option value="Phone and Computers">Phones and Computers</option>
+							<option value="Food delivery">Food delivery</option>
+							<option value="Electronics">Electronics</option>
+							<option value="Groceries">Groceries</option>
+							<option value="Furnitures">Furnitures</option>
+							<option value="Fashion">Fashion</option>
+							<option value="Baby products">Baby products</option>
+							<option value="Automobile">Automobile</option>
+							<option value="Others">Others</option>
 						</motion.select>
 						<AiOutlineEdit />
 					</div>
@@ -115,7 +160,19 @@ export const DeliveryDetails: React.FC<Props> = ({ setProgress }) => {
 				}}
 				className={styles.cta__container}
 			>
-				<button type="button" className={styles.cta} onClick={() => setProgress(3)}>
+				<button
+					type="button"
+					className={(!productName || !description || !category) ? styles.cta__disabled : styles.cta}
+					disabled={(!productName || !description || !category)}
+					onClick={() => {
+						if (deliveryType === 'active') {
+							setProgress(4);
+						} else {
+							setProgress(3);
+						}
+						deliveryDetailsSubmitHandler();
+					}}
+				>
 					Next
 				</button>
 			</motion.div>

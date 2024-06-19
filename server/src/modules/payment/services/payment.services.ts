@@ -21,7 +21,7 @@ export interface PaymentData {
 	amount: number;
 	memo: string;
 	metadata: {
-		test?: string;
+		[x: string]: string;
 	};
 	uid: string;
 }
@@ -82,11 +82,17 @@ export async function accountToUserPayment(
 
 export async function cancelledUserToAppPayment(
 	paymentId: string
-): Promise<SuccessResult<string> | ErrorResult> {
+): Promise<SuccessResult<string> | NotFoundResult | ErrorResult> {
 	try {
 		const transaction = await TransactionRepository.findOne({
 			where: { paymentId: { paymentId } },
 		});
+		if (!transaction) {
+			return {
+				type: Result.NOT_FOUND,
+				message: `Trabsaction for paymentId ${paymentId} not found`,
+			};
+		}
 		transaction.paymentId = null;
 		await TransactionRepository.save(transaction);
 		await EarningRepository.update({ paymentId }, { paymentStatus: PaymentStatus.CANCELLED });
@@ -110,15 +116,26 @@ export async function approveUserToAppPayment(
 		const transaction = await TransactionRepository.findOne({
 			where: { id: paymentData.deliveryId },
 		});
+		console.log(transaction);
 
 		const createEarning = EarningRepository.create({
 			paymentId: paymentData.paymentId,
 			amount: paymentData.amount,
 		});
+		console.log(createEarning);
 		await EarningRepository.save(createEarning);
 		transaction.paymentId = createEarning;
 		await TransactionRepository.save(transaction);
-		await platformAPIClient.post(`/v2/payments/${paymentData.paymentId}/approve`, {});
+		try {
+			await platformAPIClient.post(`/v2/payments/${paymentData.paymentId}/approve`);
+		} catch (error) {
+			console.log('approval error', error);
+			return {
+				type: Result.ERROR,
+				message: `An error occured while approving payment with id ${paymentData.paymentId}`,
+				error,
+			};
+		}
 		return {
 			type: Result.SUCCESS,
 			data: `Approved the payment ${paymentData.paymentId}`,
@@ -159,7 +176,16 @@ export async function incompleteUserToAppPayment(
 			};
 		}
 		await EarningRepository.update(earning.id, { paymentStatus: PaymentStatus.COMPLETED });
-		await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { txid });
+		try {
+			await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { txid });
+		} catch (error) {
+			console.log('incomplete payment error', error);
+			return {
+				type: Result.ERROR,
+				message: `An error occured while completing payment with id ${paymentId} and txId ${txid}`,
+				error,
+			};
+		}
 		return {
 			type: Result.SUCCESS,
 			data: `completed payment ${paymentId} successfully`,
@@ -183,7 +209,16 @@ export async function completeUserToAppPayment(
 			{ transactionId, paymentStatus: PaymentStatus.COMPLETED }
 		);
 		/* let Pi server know that the payment is completed */
-		await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { transactionId });
+		try {
+			await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { txid: transactionId });
+		} catch (error) {
+			console.log('complete payment error', error);
+			return {
+				type: Result.ERROR,
+				message: `An error occured while completing payment with id ${paymentId} and txId ${transactionId}`,
+				error,
+			};
+		}
 		return {
 			type: Result.SUCCESS,
 			data: `Completed the payment ${paymentId}`,
@@ -191,7 +226,7 @@ export async function completeUserToAppPayment(
 	} catch (error) {
 		return {
 			type: Result.ERROR,
-			message: `An unexpected error occured while trying to complete transaction with txid ${transactionId}`,
+			message: `An unexpected error occured while trying to complete transaction with txid ${transactionId} and paymentId ${paymentId}`,
 			error,
 		};
 	}

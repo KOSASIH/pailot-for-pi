@@ -77,7 +77,7 @@
 	width: 100%;
 	text-align: center;
 	color: var(--purple);
-	font-size: 14px;
+	font-size: 0.9rem;
 }
 
 .label {
@@ -88,7 +88,7 @@
 }
 
 label > p {
-	font-size: 12px;
+	font-size: 0.85rem;
 }
 
 .label > div {
@@ -115,7 +115,7 @@ label > p {
 	flex: 1;
 	border: none;
 	background-color: transparent;
-	font-size: 8px;
+	font-size:  0.75rem;
 }
 
 .input__container input:focus,
@@ -129,7 +129,7 @@ label > p {
 }
 
 .label span {
-	font-size: 8px;
+	font-size:  0.7rem;
 }
 
 .textarea {
@@ -139,7 +139,7 @@ label > p {
 	border-radius: 4px;
 	border: none;
 	resize: none;
-	font-size: 8px;
+	font-size: 0.75rem;
 	border-bottom: 1px solid var(--black);
 }
 
@@ -172,5 +172,14 @@ label > p {
 	border: none;
 	background-color: var(--purple);
 	color: var(--light-purple);
+	font-weight: 500;
+}
+
+.cta__disabled {
+	width: 100%;
+	padding: 10px;
+	border-radius: 4px;
+	border: none;
+	background-color: var(--grey);
 	font-weight: 500;
 }

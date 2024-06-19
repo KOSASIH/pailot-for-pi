@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100%;
+}
+
+.container > *:last-child {
+	display: flex;
+	flex-direction: column;
+}

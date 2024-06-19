@@ -1,0 +1,56 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 100;
+}
+
+.modal {
+	background-color: var(--white);
+	z-index: 120;
+	width: 70vw;
+	aspect-ratio: 1;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 5vw;
+	padding: 5vw;
+	border-radius: 12px;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	gap: 0.5rem;
+	font-size: clamp(1rem, 2.5vw, 4rem);
+	border-radius: 6px;
+	color: var(--black);
+	cursor: pointer;
+	-webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+	transition: all 250ms ease-in-out;
+}
+
+.input {
+	position: absolute;
+	opacity: 0;
+}
+
+.active__label {
+	background-color: var(--purple);
+	color: var(--white);
+}
+
+.backdrop {
+	inset: 0;
+	background-color: #000;
+	opacity: 0.7;
+	position: absolute;
+}

@@ -21,7 +21,35 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-		<title>React App</title>
+		<script>
+			// Hacking react-scripts method for defining environment variables because we want to be able to
+			// pass them at runtime when the container starts, instead of having to build the frontend once for
+			// each environment (e.g staging / production).
+			//
+			// This will be automatically templated:
+			// - in DEV, by react-scripts (see https://create-react-app.dev/docs/adding-custom-environment-variables/)
+			// - in PROD, by the container's entrypoint script found in docker/entrypoint.sh (this enables passing the
+			//   variables at runtime instead of consuming it at build time and building a non-portable container)
+			window.__ENV = {
+				backendURL: '%REACT_APP_BACKEND_URL%',
+				sandbox: '%REACT_APP_SANDBOX_SDK%',
+			};
+		</script>
+
+		<!-- Import the Pi Network App Platform SDK: -->
+		<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
+		<!-- TODO make sandbox conditional to env (dev / prod) -->
+		<script>
+			// Make the decision whether Pi SDK should run in "Sandbox" mode or "Pi Browser" mode based on the
+			// dedicated environment variable:
+			var runSDKInSandboxMode = window.__ENV.sandbox === 'true'; // treat env vars as strings, not booleans
+      console.log(runSDKInSandboxMode);
+
+			// Init Pi SDK:
+			Pi.init({ version: '2.0', sandbox: runSDKInSandboxMode });
+		</script>
+		<title>Pailot App</title>
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>

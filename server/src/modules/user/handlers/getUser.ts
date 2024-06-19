@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { Result } from '../../../constants/result';
+import { CustomRequest } from '../../../middlewares/auth';
 import { findUser } from '../services/user.services';
 
 export async function getUser(req: Request, res: Response) {
-	const userUid = req.params.id;
+	const userUid = (req as CustomRequest).token.userUid;
 	const userResult = await findUser(userUid);
 
 	if (userResult.type === Result.ERROR) {
