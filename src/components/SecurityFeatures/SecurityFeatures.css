@@ -1,0 +1,17 @@
+.security-features-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.security-features-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.loading, .error {
+    text-align: center;
+    color: #ff0000;
+    font-weight: bold;
+}
