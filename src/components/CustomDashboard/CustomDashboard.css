@@ -1,0 +1,33 @@
+.custom-dashboard-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dashboard-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.dashboard-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.loading, .error {
+    text-align: center;
+    color: #ff0000;
+    font-weight: bold;
+}
