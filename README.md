@@ -1,6 +1,8 @@
 # Pailot App
 Where logistics meets Web3.
 
+- Check our testnet [here](testnet.pailot.app) 
+
 ## Overview
 
 Pailot is an innovative application that bridges the gap between logistics and Web3 technology. By leveraging decentralized systems, Pailot aims to enhance transparency, efficiency, and security in the logistics industry.
