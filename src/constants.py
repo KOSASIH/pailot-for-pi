@@ -1,5 +1,3 @@
-# src/constants.py
-
 """
 Pi Coin Configuration Constants
 This module contains constants related to the Pi Coin cryptocurrency.
@@ -36,7 +34,7 @@ PI_COIN_MAX_TRANSACTION_SIZE = 1_000_000  # Maximum transaction size in bytes
 PI_COIN_DECIMALS = 18  # Number of decimal places for Pi Coin
 
 # Pi Coin Genesis Block Timestamp
-PI_COIN_GENESIS_BLOCK_TIMESTAMP = "2023-01-01T00:00:00Z"  # Timestamp of the genesis block
+PI_COIN_GENESIS_BLOCK_TIMESTAMP = "2025-01-01T00:00:00Z"  # Timestamp of the genesis block
 
 # Pi Coin Governance Model
 PI_COIN_GOVERNANCE_MODEL = "Decentralized"  # Governance model for Pi Coin
@@ -62,5 +60,23 @@ PI_COIN_API_KEY_EXPIRATION = 3600  # API key expiration time in seconds
 # Pi Coin Regulatory Compliance
 PI_COIN_KYC_REQUIRED = True  # Whether KYC is required for transactions
 PI_COIN_COMPLIANCE_JURISDICTIONS = ["US", "EU", "UK"]  # Jurisdictions for compliance
+
+# Advanced Security Features
+PI_COIN_MULTI_SIG_REQUIRED = True  # Whether multi-signature is required for high-value transactions
+PI_COIN_DDOS_PROTECTION_ENABLED = True  # Enable DDoS protection mechanisms
+
+# Enhanced Network Features
+PI_COIN_DYNAMIC_FEE_ADJUSTMENT = True  # Enable dynamic transaction fee adjustment based on network congestion
+PI_COIN_MAX_BLOCK_SIZE = 2_000_000  # Maximum block size in bytes
+
+# Privacy Features
+PI_COIN_ANONYMITY_PROTOCOL = "Zero-Knowledge Proof"  # Protocol for enhancing transaction privacy
+
+# Governance Features
+PI_COIN_VOTING_PERIOD_DAYS = 30  # Duration for governance voting in days
+PI_COIN_VOTING_QUORUM = 0.2  # Minimum percentage of votes required for a decision to be valid
+
+# Ecosystem Integration
+PI_COIN_PARTNER_PLATFORMS = ["E-commerce", "Gaming", "Charity"]  # Platforms that accept Pi Coin
 
 # Additional constants can be added here as needed
