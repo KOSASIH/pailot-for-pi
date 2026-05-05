@@ -58,3 +58,4 @@ For any inquiries or support, please reach out to the project maintainers via th
 - Thanks to the contributors and the open-source community for their support and inspiration in developing Pailot.
 - Special thanks to the developers of the libraries and frameworks that made this project possible.
 - We appreciate the feedback from our users that helps us improve the application continuously.
+
